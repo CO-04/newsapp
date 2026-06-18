@@ -1,3 +1,23 @@
+"""
+news.views
+==========
+
+HTTP view functions for the NewsApp news module.
+
+View groups
+-----------
+Article views
+    List, detail, create, edit, delete, and editor approval queue.
+Newsletter views
+    List, detail, create, edit, and delete newsletters.
+Publisher views
+    Create, edit, delete, and detail pages for publishers.
+Journalist profile
+    Public profile page showing a journalist's approved articles.
+Subscription views
+    Reader toggle-subscription endpoints for publishers and journalists.
+"""
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
@@ -21,10 +41,15 @@ User = get_user_model()
 # ---------------------------------------------------------------------------
 
 def article_list(request):
-    """
-    Display a paginated list of all approved articles, newest first.
+    """Display a paginated list of all approved articles, newest first.
 
     Accessible to all users (authenticated and anonymous).
+    Results are paginated at 9 articles per page.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered article list page.
+    :rtype: HttpResponse
     """
     qs = (
         Article.objects
@@ -38,11 +63,17 @@ def article_list(request):
 
 
 def article_detail(request, pk):
-    """
-    Display a single article.
+    """Display a single article.
 
     Unapproved articles are visible only to the article's author and editors.
     All other users receive a 403 response for unapproved articles.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the article to display.
+    :type pk: int
+    :returns: Rendered article detail page, or a 403 response.
+    :rtype: HttpResponse
     """
     article = get_object_or_404(Article, pk=pk)
     if not article.approved:
@@ -76,12 +107,19 @@ def article_detail(request, pk):
 
 @journalist_required
 def create_article(request):
-    """
-    Allow a journalist to create a new draft article or submit one for review.
+    """Allow a journalist to draft or submit an article for review.
 
     Two submit buttons drive the behaviour:
-    - ``Save Draft``           – saves with submitted=False
-    - ``Submit for Review`` – saves submitted=True, queues for editor
+
+    - ``Save Draft`` — saves with ``submitted=False``.
+    - ``Submit for Review`` — saves with ``submitted=True``,
+      queuing for editor review.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered article form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -109,10 +147,17 @@ def create_article(request):
 
 @login_required_custom
 def edit_article(request, pk):
-    """
-    Allow the article's author or any editor to edit an article.
+    """Allow the article's author or any editor to edit an article.
 
     A journalist who did not author the article receives a 403 response.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the article to edit.
+    :type pk: int
+    :returns: Rendered article form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     article = get_object_or_404(Article, pk=pk)
     user    = request.user
@@ -158,10 +203,16 @@ def edit_article(request, pk):
 
 @login_required_custom
 def delete_article(request, pk):
-    """
-    Allow the article's author or any editor to delete an article.
+    """Allow the article's author or any editor to delete an article.
 
     Displays a confirmation page on GET and performs the deletion on POST.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the article to delete.
+    :type pk: int
+    :returns: Rendered confirmation page on GET, or redirect on POST.
+    :rtype: HttpResponse
     """
     article = get_object_or_404(Article, pk=pk)
     user    = request.user
@@ -197,11 +248,16 @@ def delete_article(request, pk):
 
 @editor_required
 def editor_queue(request):
-    """
-    Display all unapproved articles that have been submitted for review,
-    ordered by submission date (oldest first).
+    """Display all unapproved articles that have been submitted for review.
 
+    Articles are ordered by submission date (oldest first) so editors
+    process them in the order they were received.
     Accessible only to editors.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered editor queue page.
+    :rtype: HttpResponse
     """
     articles = (
         Article.objects
@@ -214,12 +270,18 @@ def editor_queue(request):
 
 @editor_required
 def approve_article(request, pk):
-    """
-    Approve a pending article.
+    """Approve a pending article.
 
-    Sets the private _just_approved flag on the instance before saving so
-    the post_save signal (Phase 4) can distinguish a new approval from an
-    ordinary re-save and avoid sending duplicate emails or tweets.
+    Sets the private ``_just_approved`` flag on the instance before saving so
+    the ``post_save`` signal can distinguish a new approval from an ordinary
+    re-save, avoiding duplicate notification emails or tweets.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the article to approve.
+    :type pk: int
+    :returns: Redirect to the editor queue.
+    :rtype: HttpResponseRedirect
     """
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
@@ -238,11 +300,17 @@ def approve_article(request, pk):
 
 @editor_required
 def reject_article(request, pk):
-    """
-    Return a pending article to the journalist without approving it.
+    """Return a pending article to the journalist without approving it.
 
-    The article remains in the queue (approved=False); a flash message
+    The article remains in the queue (``approved=False``); a flash message
     notifies the editor that the article was returned.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the article to reject.
+    :type pk: int
+    :returns: Redirect to the editor queue.
+    :rtype: HttpResponseRedirect
     """
     article = get_object_or_404(Article, pk=pk)
     if request.method == 'POST':
@@ -260,11 +328,16 @@ def reject_article(request, pk):
 
 @journalist_required
 def journalist_dashboard(request):
-    """
-    Show the logged-in journalist their own articles and newsletters.
+    """Show the logged-in journalist their own articles and newsletters.
 
-    Articles are grouped by approval status so the journalist can see
-    which drafts are pending review.
+    Articles are ordered newest-first so the journalist can see recent
+    work at a glance, including which drafts are pending review.
+
+    :param request: The incoming HTTP request (must be an
+        authenticated journalist).
+    :type request: HttpRequest
+    :returns: Rendered journalist dashboard page.
+    :rtype: HttpResponse
     """
     articles    = Article.objects.filter(
         author=request.user,
@@ -284,10 +357,14 @@ def journalist_dashboard(request):
 # ---------------------------------------------------------------------------
 
 def newsletter_list(request):
-    """
-    Display a list of all newsletters, newest first.
+    """Display a list of all newsletters, newest first.
 
-    Accessible to all users.
+    Accessible to all users (authenticated and anonymous).
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered newsletter list page.
+    :rtype: HttpResponse
     """
     newsletters = (
         Newsletter.objects
@@ -302,10 +379,16 @@ def newsletter_list(request):
 
 
 def newsletter_detail(request, pk):
-    """
-    Display a single newsletter with its included articles.
+    """Display a single newsletter with its included articles.
 
-    Accessible to all users.
+    Accessible to all users (authenticated and anonymous).
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the newsletter to display.
+    :type pk: int
+    :returns: Rendered newsletter detail page.
+    :rtype: HttpResponse
     """
     newsletter = get_object_or_404(
         Newsletter.objects.prefetch_related('articles__author'), pk=pk
@@ -319,10 +402,15 @@ def newsletter_detail(request, pk):
 
 @journalist_required
 def create_newsletter(request):
-    """
-    Allow a journalist to create a new newsletter.
+    """Allow a journalist to create a new newsletter.
 
-    The logged-in user is set as the author before saving.
+    The logged-in user is automatically set as the author before saving.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered newsletter form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     if request.method == 'POST':
         form = NewsletterForm(request.POST)
@@ -347,10 +435,17 @@ def create_newsletter(request):
 
 @login_required_custom
 def edit_newsletter(request, pk):
-    """
-    Allow the newsletter's author or any editor to edit a newsletter.
+    """Allow the newsletter's author or any editor to edit a newsletter.
 
     A journalist who did not author the newsletter receives a 403 response.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the newsletter to edit.
+    :type pk: int
+    :returns: Rendered newsletter form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     newsletter = get_object_or_404(Newsletter, pk=pk)
     user       = request.user
@@ -379,10 +474,16 @@ def edit_newsletter(request, pk):
 
 @login_required_custom
 def delete_newsletter(request, pk):
-    """
-    Allow the newsletter's author or any editor to delete a newsletter.
+    """Allow the newsletter's author or any editor to delete a newsletter.
 
     Displays a confirmation page on GET and performs the deletion on POST.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the newsletter to delete.
+    :type pk: int
+    :returns: Rendered confirmation page on GET, or redirect on POST.
+    :rtype: HttpResponse
     """
     newsletter = get_object_or_404(Newsletter, pk=pk)
     user       = request.user
@@ -418,11 +519,16 @@ def delete_newsletter(request, pk):
 
 @editor_required
 def create_publisher(request):
-    """
-    Allow an editor to create a new publisher from the web interface.
+    """Allow an editor to create a new publisher from the web interface.
 
-    On GET  — render a blank PublisherForm.
-    On POST — validate and save; redirect to the new publisher's detail page.
+    On GET renders a blank ``PublisherForm``.
+    On POST validates and saves; redirects to the new publisher's detail page.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered publisher form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     form = PublisherForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -438,6 +544,19 @@ def create_publisher(request):
 
 @editor_required
 def edit_publisher(request, pk):
+    """Allow an editor to update an existing publisher's details.
+
+    On GET renders a pre-filled ``PublisherForm``.
+    On POST validates and saves; redirects to the publisher's detail page.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the publisher to edit.
+    :type pk: int
+    :returns: Rendered publisher form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
+    """
     publisher = get_object_or_404(Publisher, pk=pk)
     form = PublisherForm(
         request.POST or None,
@@ -459,6 +578,18 @@ def edit_publisher(request, pk):
 
 @editor_required
 def delete_publisher(request, pk):
+    """Allow an editor to delete a publisher.
+
+    Displays a confirmation page on GET and performs the deletion on POST.
+    After deletion, redirects to the article list.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the publisher to delete.
+    :type pk: int
+    :returns: Rendered confirmation page on GET, or redirect on POST.
+    :rtype: HttpResponse
+    """
     publisher = get_object_or_404(Publisher, pk=pk)
     if request.method == 'POST':
         name = publisher.name
@@ -478,10 +609,17 @@ def delete_publisher(request, pk):
 
 
 def publisher_detail(request, pk):
-    """
-    Display a publisher's profile page and their latest approved articles.
+    """Display a publisher's profile page and their latest approved articles.
 
-    Readers see a Subscribe / Unsubscribe toggle button.
+    Readers see a Subscribe / Unsubscribe toggle button based on whether
+    they are already subscribed to this publisher.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the publisher to display.
+    :type pk: int
+    :returns: Rendered publisher detail page.
+    :rtype: HttpResponse
     """
     publisher = get_object_or_404(Publisher, pk=pk)
     articles  = (
@@ -509,10 +647,17 @@ def publisher_detail(request, pk):
 
 
 def journalist_profile(request, pk):
-    """
-    Display a journalist's profile page and their approved articles.
+    """Display a journalist's profile page and their approved articles.
 
-    Readers see a Subscribe / Unsubscribe toggle button.
+    Readers see a Subscribe / Unsubscribe toggle button based on whether
+    they are already subscribed to this journalist.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :param pk: Primary key of the journalist (CustomUser) to display.
+    :type pk: int
+    :returns: Rendered journalist profile page.
+    :rtype: HttpResponse
     """
     journalist = get_object_or_404(User, pk=pk, role='journalist')
     articles   = (
@@ -545,12 +690,19 @@ def journalist_profile(request, pk):
 
 @reader_required
 def subscribe_publisher(request, pk):
-    """
-    Toggle the current reader's subscription to a publisher.
+    """Toggle the current reader's subscription to a publisher.
 
     On POST, adds or removes the publisher from the reader's
-    subscribed_publishers field and shows a flash message.  Redirects back
-    to the publisher's profile page.
+    ``subscribed_publishers`` M2M field and shows a flash message.
+    Redirects back to the publisher's profile page.
+
+    :param request: The incoming HTTP request (must be an
+        authenticated reader).
+    :type request: HttpRequest
+    :param pk: Primary key of the publisher to subscribe/unsubscribe from.
+    :type pk: int
+    :returns: Redirect to the publisher detail page.
+    :rtype: HttpResponseRedirect
     """
     publisher = get_object_or_404(Publisher, pk=pk)
     if request.method == 'POST':
@@ -569,12 +721,20 @@ def subscribe_publisher(request, pk):
 
 @reader_required
 def subscribe_journalist(request, pk):
-    """
-    Toggle the current reader's subscription to a journalist.
+    """Toggle the current reader's subscription to a journalist.
 
     On POST, adds or removes the journalist from the reader's
-    subscribed_journalists field and shows a flash message.  Redirects back
-    to the journalist's profile page.
+    ``subscribed_journalists`` M2M field and shows a flash message.
+    Redirects back to the journalist's profile page.
+
+    :param request: The incoming HTTP request (must be an
+        authenticated reader).
+    :type request: HttpRequest
+    :param pk: Primary key of the journalist (CustomUser) to
+        subscribe/unsubscribe from.
+    :type pk: int
+    :returns: Redirect to the journalist profile page.
+    :rtype: HttpResponseRedirect
     """
     journalist = get_object_or_404(User, pk=pk, role='journalist')
     if request.method == 'POST':
