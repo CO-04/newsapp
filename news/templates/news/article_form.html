@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{% if editing %}Edit Article{% else %}New Article{% endif %} – NewsApp{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{% if editing %}Edit Article{% else %}Create New Article{% endif %}</h2>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
+                {{ field.label }}
+            </label>
+            {% if field.name == 'articles' %}
+                {# Checkboxes rendered without form-control wrapper #}
+                {{ field }}
+            {% else %}
+                {{ field }}
+            {% endif %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div class="text-danger small mt-1">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            {% if field.help_text %}
+                <div class="form-text text-muted">{{ field.help_text }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <div class="d-flex gap-2 flex-wrap">
+        {% if editing and article.approved %}
+            {# Approved articles get a plain save — no submission state change #}
+            <button type="submit" name="action" value="draft" class="btn btn-primary">
+                Save Changes
+            </button>
+        {% else %}
+            <button type="submit" name="action" value="draft" class="btn btn-outline-secondary">
+                Save Draft
+            </button>
+            <button type="submit" name="action" value="submit" class="btn btn-primary">
+                Submit for Review
+            </button>
+        {% endif %}
+        {% if editing and article %}
+            <a href="{% url 'news:article_detail' article.pk %}" class="btn btn-link text-secondary">
+                Cancel
+            </a>
+        {% else %}
+            <a href="{% url 'news:journalist_dashboard' %}" class="btn btn-link text-secondary">
+                Cancel
+            </a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

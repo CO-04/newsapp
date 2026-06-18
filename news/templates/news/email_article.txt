@@ -1,0 +1,13 @@
+A new article has been published on NewsApp that you may be interested in.
+
+Title:   {{ article.title }}
+Author:  {{ article.author.get_full_name|default:article.author.username }}
+{% if article.publisher %}Publisher: {{ article.publisher.name }}
+{% endif %}
+---
+
+{{ article.content|truncatewords:80 }}
+
+---
+You are receiving this email because you subscribed to this journalist or
+publisher on NewsApp.  To manage your subscriptions, log in to your account.

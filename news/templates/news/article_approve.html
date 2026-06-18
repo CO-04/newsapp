@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Editor Review Queue – NewsApp{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">
+    Editor Review Queue
+    <span class="badge bg-warning text-dark ms-2">{{ articles|length }} pending</span>
+</h2>
+
+{% if articles %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'news:article_detail' article.pk %}">
+                                {{ article.title }}
+                            </a>
+                        </td>
+                        <td>{{ article.author.username }}</td>
+                        <td>{{ article.publisher.name|default:"–" }}</td>
+                        <td>{{ article.created_at|date:"d M Y" }}</td>
+                        <td>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <a href="{% url 'news:article_detail' article.pk %}"
+                                   class="btn btn-outline-secondary btn-sm">Preview</a>
+
+                                <form method="post"
+                                      action="{% url 'news:approve_article' article.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        &#10003; Approve
+                                    </button>
+                                </form>
+
+                                <form method="post"
+                                      action="{% url 'news:reject_article' article.pk %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        &#10007; Reject
+                                    </button>
+                                </form>
+
+                                <a href="{% url 'news:edit_article' article.pk %}"
+                                   class="btn btn-warning btn-sm">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="text-muted">No articles pending review.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}My Dashboard – NewsApp{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">My Dashboard</h2>
+
+<!-- Articles section -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">My Articles</h4>
+    <a href="{% url 'news:create_article' %}" class="btn btn-primary btn-sm">+ New Article</a>
+</div>
+
+{% if articles %}
+    <table class="table table-hover mb-5">
+        <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>
+                        <a href="{% url 'news:article_detail' article.pk %}">
+                            {{ article.title }}
+                        </a>
+                    </td>
+                    <td>
+                        {% if article.approved %}
+                            <span class="badge bg-success">&#10003; Published</span>
+                        {% elif article.submitted %}
+                            <span class="badge bg-info text-dark">&#8987; Awaiting Review</span>
+                        {% else %}
+                            <span class="badge bg-secondary">&#9998; Draft</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ article.created_at|date:"d M Y" }}</td>
+                    <td>
+                        <a href="{% url 'news:edit_article' article.pk %}"
+                           class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'news:delete_article' article.pk %}"
+                           class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted mb-5">You have not written any articles yet.</p>
+{% endif %}
+
+<!-- Newsletters section -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">My Newsletters</h4>
+    <a href="{% url 'news:create_newsletter' %}" class="btn btn-primary btn-sm">
+        + New Newsletter
+    </a>
+</div>
+
+{% if newsletters %}
+    <table class="table table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Title</th>
+                <th>Articles</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nl in newsletters %}
+                <tr>
+                    <td>
+                        <a href="{% url 'news:newsletter_detail' nl.pk %}">{{ nl.title }}</a>
+                    </td>
+                    <td>{{ nl.articles.count }}</td>
+                    <td>{{ nl.created_at|date:"d M Y" }}</td>
+                    <td>
+                        <a href="{% url 'news:newsletter_detail' nl.pk %}"
+                           class="btn btn-outline-secondary btn-sm">View</a>
+                        <a href="{% url 'news:edit_newsletter' nl.pk %}"
+                           class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'news:delete_newsletter' nl.pk %}"
+                           class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="text-muted">You have not created any newsletters yet.</p>
+{% endif %}
+{% endblock %}

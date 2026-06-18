@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ newsletter.title }} – NewsApp{% endblock %}
+
+{% block content %}
+<a href="{% url 'news:newsletter_list' %}" class="btn btn-outline-secondary btn-sm mb-3">
+    &larr; Back to Newsletters
+</a>
+
+<h2>{{ newsletter.title }}</h2>
+<p class="text-muted">
+    By {{ newsletter.author.username }}
+    &nbsp;·&nbsp; Created {{ newsletter.created_at|date:"d M Y" }}
+</p>
+
+{% if newsletter.description %}
+    <p>{{ newsletter.description }}</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+    {% if user.is_editor or newsletter.author == user %}
+        <div class="d-flex gap-2 mb-4">
+            <a href="{% url 'news:edit_newsletter' newsletter.pk %}"
+               class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'news:delete_newsletter' newsletter.pk %}"
+               class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    {% endif %}
+{% endif %}
+
+<h5 class="mt-4">Articles in This Newsletter</h5>
+<hr>
+
+{% if newsletter.articles.all %}
+    <div class="list-group">
+        {% for article in newsletter.articles.all %}
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{{ article.title }}</strong>
+                    <br>
+                    <small class="text-muted">
+                        {{ article.author.username }}
+                        &nbsp;·&nbsp; {{ article.created_at|date:"d M Y" }}
+                    </small>
+                </div>
+                <a href="{% url 'news:article_detail' article.pk %}"
+                   class="btn btn-outline-primary btn-sm">Read &rarr;</a>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">No articles in this newsletter yet.</p>
+{% endif %}
+{% endblock %}

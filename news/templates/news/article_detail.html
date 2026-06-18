@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} – NewsApp{% endblock %}
+
+{% block content %}
+<a href="{% url 'news:article_list' %}" class="btn btn-outline-secondary btn-sm mb-3">
+    &larr; Back to Articles
+</a>
+
+<article>
+    <h1>{{ article.title }}</h1>
+    <p class="text-muted">
+        By <a href="{% url 'news:journalist_profile' article.author.pk %}">
+            {{ article.author.username }}
+        </a>
+        {% if article.publisher %}
+            &nbsp;·&nbsp; Publisher:
+            <a href="{% url 'news:publisher_detail' article.publisher.pk %}">
+                {{ article.publisher.name }}
+            </a>
+        {% endif %}
+        &nbsp;·&nbsp; {{ article.created_at|date:"d M Y" }}
+    </p>
+
+    {% if article.image %}
+        <img src="{{ article.image.url }}" class="img-fluid rounded mb-3"
+             alt="{{ article.title }}">
+    {% endif %}
+
+    <div class="article-content mb-4">
+        {{ article.content|linebreaks }}
+    </div>
+
+    <!-- Editor / author controls -->
+    {% if user.is_authenticated %}
+        {% if user.is_editor or article.author == user %}
+            <div class="d-flex gap-2 mb-4">
+                <a href="{% url 'news:edit_article' article.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'news:delete_article' article.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <hr>
+
+    <!-- About the author -->
+    <section class="mb-3">
+        <h5>About the Author</h5>
+        <p>
+            <a href="{% url 'news:journalist_profile' article.author.pk %}">
+                {{ article.author.username }}
+            </a>
+            {% if article.author.bio %} &ndash; {{ article.author.bio }}{% endif %}
+        </p>
+        {% if user.is_authenticated and user.is_reader %}
+            <form method="post"
+                  action="{% url 'news:subscribe_journalist' article.author.pk %}">
+                {% csrf_token %}
+                <button type="submit"
+                        class="btn btn-sm {% if subscribed_journalist %}btn-outline-secondary{% else %}btn-outline-primary{% endif %}">
+                    {% if subscribed_journalist %}Unsubscribe from {{ article.author.username }}{% else %}Subscribe to {{ article.author.username }}{% endif %}
+                </button>
+            </form>
+        {% endif %}
+    </section>
+
+    <!-- Publisher subscription -->
+    {% if article.publisher %}
+        <section>
+            <h5>Part of Publisher</h5>
+            <p>
+                <a href="{% url 'news:publisher_detail' article.publisher.pk %}">
+                    {{ article.publisher.name }}
+                </a>
+            </p>
+            {% if user.is_authenticated and user.is_reader %}
+                <form method="post"
+                      action="{% url 'news:subscribe_publisher' article.publisher.pk %}">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="btn btn-sm {% if subscribed_publisher %}btn-outline-secondary{% else %}btn-outline-primary{% endif %}">
+                        {% if subscribed_publisher %}Unsubscribe from {{ article.publisher.name }}{% else %}Subscribe to {{ article.publisher.name }}{% endif %}
+                    </button>
+                </form>
+            {% endif %}
+        </section>
+    {% endif %}
+</article>
+{% endblock %}
