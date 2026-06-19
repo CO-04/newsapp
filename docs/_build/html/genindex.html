@@ -1,0 +1,1466 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#"><link rel="search" title="Search" href="search.html">
+
+    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 --><title>Index - NewsApp 1.0 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">NewsApp 1.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">NewsApp 1.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">newsapp</a><input aria-label="Toggle navigation of newsapp" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="accounts.html">accounts package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="news.html">news package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="newsapp.html">newsapp package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#O"><strong>O</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#W"><strong>W</strong></a></div>
+</section>
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    accounts
+
+        <ul>
+          <li><a href="accounts.html#module-accounts">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.admin
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.admin">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.apps
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.apps">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.forms
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.forms">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.models
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.models">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.signals
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.signals">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.tests
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.tests">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.urls
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.urls">module</a>
+</li>
+        </ul></li>
+        <li>
+    accounts.views
+
+        <ul>
+          <li><a href="accounts.html#module-accounts.views">module</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.apps.AccountsConfig">AccountsConfig (class in accounts.apps)</a>
+</li>
+        <li><a href="news.html#news.admin.ArticleAdmin.actions">actions (news.admin.ArticleAdmin attribute)</a>
+</li>
+        <li><a href="news.html#news.views.approve_article">approve_article() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.admin.ArticleAdmin.approve_selected">approve_selected() (news.admin.ArticleAdmin method)</a>
+</li>
+        <li><a href="news.html#news.models.Article.approved">approved (news.models.Article attribute)</a>
+</li>
+        <li><a href="news.html#news.models.Article">Article (class in news.models)</a>
+</li>
+        <li><a href="news.html#news.models.Article.DoesNotExist">Article.DoesNotExist</a>
+</li>
+        <li><a href="news.html#news.models.Article.MultipleObjectsReturned">Article.MultipleObjectsReturned</a>
+</li>
+        <li><a href="news.html#news.models.Article.NotUpdated">Article.NotUpdated</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.views.article_detail">article_detail() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.article_list">article_list() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.admin.ArticleAdmin">ArticleAdmin (class in news.admin)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleAPITests">ArticleAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.serializers.ArticleApprovalSerializer">ArticleApprovalSerializer (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.serializers.ArticleApprovalSerializer.Meta">ArticleApprovalSerializer.Meta (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleApprovalTests">ArticleApprovalTests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleApproveAPITests">ArticleApproveAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleApproveView">ArticleApproveView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleDeleteAPITests">ArticleDeleteAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleDetailView">ArticleDetailView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.forms.ArticleForm">ArticleForm (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.forms.ArticleForm.Meta">ArticleForm.Meta (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleListCreateView">ArticleListCreateView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleListViewTests">ArticleListViewTests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleModelTests">ArticleModelTests (class in news.tests)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.articles">articles (accounts.models.CustomUser attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.articles">(news.models.Newsletter attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.articles">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.serializers.ArticleSerializer">ArticleSerializer (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.serializers.ArticleSerializer.Meta">ArticleSerializer.Meta (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleSubscribedAPITests">ArticleSubscribedAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleSubscribedListView">ArticleSubscribedListView (class in news.api_views)</a>
+</li>
+        <li><a href="accounts.html#accounts.signals.assign_group_on_save">assign_group_on_save() (in module accounts.signals)</a>
+</li>
+        <li><a href="news.html#news.models.Article.author">author (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.author">(news.models.Newsletter attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.models.Article.author_id">author_id (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.author_id">(news.models.Newsletter attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.base_fields">base_fields (accounts.forms.RegistrationForm attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.forms.ArticleForm.base_fields">(news.forms.ArticleForm attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.NewsletterForm.base_fields">(news.forms.NewsletterForm attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.base_fields">(news.forms.PublisherForm attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.bio">bio (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.forms.BootstrapFormMixin">BootstrapFormMixin (class in accounts.forms)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.clean_email">clean_email() (accounts.forms.RegistrationForm method)</a>
+</li>
+        <li><a href="news.html#news.models.Article.content">content (news.models.Article attribute)</a>
+</li>
+        <li><a href="news.html#news.views.create_article">create_article() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.create_newsletter">create_newsletter() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.create_publisher">create_publisher() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.models.Article.created_at">created_at (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.created_at">(news.models.Newsletter attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.created_at">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser">CustomUser (class in accounts.models)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.DoesNotExist">CustomUser.DoesNotExist</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.MultipleObjectsReturned">CustomUser.MultipleObjectsReturned</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.NotUpdated">CustomUser.NotUpdated</a>
+</li>
+        <li><a href="accounts.html#accounts.admin.CustomUserAdmin">CustomUserAdmin (class in accounts.admin)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.CustomUserRoleTests">CustomUserRoleTests (class in accounts.tests)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.date_joined">date_joined (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.declared_fields">declared_fields (accounts.forms.RegistrationForm attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.forms.ArticleForm.declared_fields">(news.forms.ArticleForm attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.NewsletterForm.declared_fields">(news.forms.NewsletterForm attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.declared_fields">(news.forms.PublisherForm attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.tests.DecoratorAccessTests">DecoratorAccessTests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.views.delete_article">delete_article() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.delete_newsletter">delete_newsletter() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.delete_publisher">delete_publisher() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.models.Newsletter.description">description (news.models.Newsletter attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Publisher.description">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.views.edit_article">edit_article() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.edit_newsletter">edit_newsletter() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.edit_publisher">edit_publisher() (in module news.views)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.views.editor_queue">editor_queue() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.decorators.editor_required">editor_required() (in module news.decorators)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.email">email (accounts.models.CustomUser attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.Meta.fields">fields (accounts.forms.RegistrationForm.Meta attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.forms.ArticleForm.Meta.fields">(news.forms.ArticleForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.NewsletterForm.Meta.fields">(news.forms.NewsletterForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.Meta.fields">(news.forms.PublisherForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.ArticleApprovalSerializer.Meta.fields">(news.serializers.ArticleApprovalSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.ArticleSerializer.Meta.fields">(news.serializers.ArticleSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.NewsletterSerializer.Meta.fields">(news.serializers.NewsletterSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.PublisherSerializer.Meta.fields">(news.serializers.PublisherSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.UserSerializer.Meta.fields">(news.serializers.UserSerializer.Meta attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.admin.CustomUserAdmin.fieldsets">fieldsets (accounts.admin.CustomUserAdmin attribute)</a>
+</li>
+        <li><a href="news.html#news.admin.NewsletterAdmin.filter_horizontal">filter_horizontal (news.admin.NewsletterAdmin attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.first_name">first_name (accounts.models.CustomUser attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Article.get_next_by_created_at">get_next_by_created_at() (news.models.Article method)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.get_next_by_created_at">(news.models.Newsletter method)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.get_next_by_created_at">(news.models.Publisher method)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.models.CustomUser.get_next_by_date_joined">get_next_by_date_joined() (accounts.models.CustomUser method)</a>
+</li>
+        <li><a href="news.html#news.models.Article.get_next_by_updated_at">get_next_by_updated_at() (news.models.Article method)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.get_next_by_updated_at">(news.models.Newsletter method)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.models.Article.get_previous_by_created_at">get_previous_by_created_at() (news.models.Article method)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.get_previous_by_created_at">(news.models.Newsletter method)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.get_previous_by_created_at">(news.models.Publisher method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.get_previous_by_date_joined">get_previous_by_date_joined() (accounts.models.CustomUser method)</a>
+</li>
+        <li><a href="news.html#news.models.Article.get_previous_by_updated_at">get_previous_by_updated_at() (news.models.Article method)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.get_previous_by_updated_at">(news.models.Newsletter method)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.api_views.ArticleListCreateView.get_queryset">get_queryset() (news.api_views.ArticleListCreateView method)</a>
+
+        <ul>
+          <li><a href="news.html#news.api_views.ArticleSubscribedListView.get_queryset">(news.api_views.ArticleSubscribedListView method)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.models.CustomUser.get_role_display">get_role_display() (accounts.models.CustomUser method)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.groups">groups (accounts.models.CustomUser attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.permissions.IsApprovedOrAuthorOrEditor.has_object_permission">has_object_permission() (news.permissions.IsApprovedOrAuthorOrEditor method)</a>
+
+        <ul>
+          <li><a href="news.html#news.permissions.IsAuthorOrEditor.has_object_permission">(news.permissions.IsAuthorOrEditor method)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.permissions.IsApprovedOrAuthorOrEditor.has_permission">has_permission() (news.permissions.IsApprovedOrAuthorOrEditor method)</a>
+
+        <ul>
+          <li><a href="news.html#news.permissions.IsAuthorOrEditor.has_permission">(news.permissions.IsAuthorOrEditor method)</a>
+</li>
+          <li><a href="news.html#news.permissions.IsEditorOrReadOnly.has_permission">(news.permissions.IsEditorOrReadOnly method)</a>
+</li>
+          <li><a href="news.html#news.permissions.IsJournalistOrReadOnly.has_permission">(news.permissions.IsJournalistOrReadOnly method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.id">id (accounts.models.CustomUser attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Article.id">(news.models.Article attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Newsletter.id">(news.models.Newsletter attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.id">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.models.Article.image">image (news.models.Article attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_active">is_active (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_editor">is_editor() (accounts.models.CustomUser method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_journalist">is_journalist() (accounts.models.CustomUser method)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_reader">is_reader() (accounts.models.CustomUser method)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_staff">is_staff (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.is_superuser">is_superuser (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="news.html#news.permissions.IsApprovedOrAuthorOrEditor">IsApprovedOrAuthorOrEditor (class in news.permissions)</a>
+</li>
+        <li><a href="news.html#news.permissions.IsAuthorOrEditor">IsAuthorOrEditor (class in news.permissions)</a>
+</li>
+        <li><a href="news.html#news.permissions.IsEditorOrReadOnly">IsEditorOrReadOnly (class in news.permissions)</a>
+</li>
+        <li><a href="news.html#news.permissions.IsJournalistOrReadOnly">IsJournalistOrReadOnly (class in news.permissions)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="J" class="genindex-section">
+  <h2>J</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.views.journalist_dashboard">journalist_dashboard() (in module news.views)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.views.journalist_profile">journalist_profile() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.decorators.journalist_required">journalist_required() (in module news.decorators)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.last_login">last_login (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.last_name">last_name (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.admin.CustomUserAdmin.list_display">list_display (accounts.admin.CustomUserAdmin attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.admin.ArticleAdmin.list_display">(news.admin.ArticleAdmin attribute)</a>
+</li>
+          <li><a href="news.html#news.admin.NewsletterAdmin.list_display">(news.admin.NewsletterAdmin attribute)</a>
+</li>
+          <li><a href="news.html#news.admin.PublisherAdmin.list_display">(news.admin.PublisherAdmin attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.admin.CustomUserAdmin.list_filter">list_filter (accounts.admin.CustomUserAdmin attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.admin.ArticleAdmin.list_filter">(news.admin.ArticleAdmin attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.logentry_set">logentry_set (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="news.html#news.decorators.login_required_custom">login_required_custom() (in module news.decorators)</a>
+</li>
+        <li><a href="accounts.html#accounts.views.login_user">login_user() (in module accounts.views)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests">LoginViewTests (class in accounts.tests)</a>
+</li>
+        <li><a href="news.html#news.models.Publisher.logo">logo (news.models.Publisher attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.views.logout_user">logout_user() (in module accounts.views)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.tests.make_article">make_article() (in module news.tests)</a>
+</li>
+        <li><a href="news.html#news.tests.make_newsletter">make_newsletter() (in module news.tests)</a>
+</li>
+        <li><a href="news.html#news.tests.make_publisher">make_publisher() (in module news.tests)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.make_user">make_user() (in module accounts.tests)</a>
+
+        <ul>
+          <li><a href="news.html#news.tests.make_user">(in module news.tests)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.admin.CustomUserAdmin.media">media (accounts.admin.CustomUserAdmin property)</a>
+
+        <ul>
+          <li><a href="accounts.html#accounts.forms.RegistrationForm.media">(accounts.forms.RegistrationForm property)</a>
+</li>
+          <li><a href="news.html#news.admin.ArticleAdmin.media">(news.admin.ArticleAdmin property)</a>
+</li>
+          <li><a href="news.html#news.admin.NewsletterAdmin.media">(news.admin.NewsletterAdmin property)</a>
+</li>
+          <li><a href="news.html#news.admin.PublisherAdmin.media">(news.admin.PublisherAdmin property)</a>
+</li>
+          <li><a href="news.html#news.forms.ArticleForm.media">(news.forms.ArticleForm property)</a>
+</li>
+          <li><a href="news.html#news.forms.NewsletterForm.media">(news.forms.NewsletterForm property)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.media">(news.forms.PublisherForm property)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.Meta.model">model (accounts.forms.RegistrationForm.Meta attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.forms.ArticleForm.Meta.model">(news.forms.ArticleForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.NewsletterForm.Meta.model">(news.forms.NewsletterForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.Meta.model">(news.forms.PublisherForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.ArticleApprovalSerializer.Meta.model">(news.serializers.ArticleApprovalSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.ArticleSerializer.Meta.model">(news.serializers.ArticleSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.NewsletterSerializer.Meta.model">(news.serializers.NewsletterSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.PublisherSerializer.Meta.model">(news.serializers.PublisherSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.UserSerializer.Meta.model">(news.serializers.UserSerializer.Meta attribute)</a>
+</li>
+        </ul></li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="accounts.html#module-accounts">accounts</a>
+</li>
+          <li><a href="accounts.html#module-accounts.admin">accounts.admin</a>
+</li>
+          <li><a href="accounts.html#module-accounts.apps">accounts.apps</a>
+</li>
+          <li><a href="accounts.html#module-accounts.forms">accounts.forms</a>
+</li>
+          <li><a href="accounts.html#module-accounts.models">accounts.models</a>
+</li>
+          <li><a href="accounts.html#module-accounts.signals">accounts.signals</a>
+</li>
+          <li><a href="accounts.html#module-accounts.tests">accounts.tests</a>
+</li>
+          <li><a href="accounts.html#module-accounts.urls">accounts.urls</a>
+</li>
+          <li><a href="accounts.html#module-accounts.views">accounts.views</a>
+</li>
+          <li><a href="news.html#module-news">news</a>
+</li>
+          <li><a href="news.html#module-news.admin">news.admin</a>
+</li>
+          <li><a href="news.html#module-news.api_urls">news.api_urls</a>
+</li>
+          <li><a href="news.html#module-news.api_views">news.api_views</a>
+</li>
+          <li><a href="news.html#module-news.apps">news.apps</a>
+</li>
+          <li><a href="news.html#module-news.decorators">news.decorators</a>
+</li>
+          <li><a href="news.html#module-news.forms">news.forms</a>
+</li>
+          <li><a href="news.html#module-news.models">news.models</a>
+</li>
+          <li><a href="news.html#module-news.permissions">news.permissions</a>
+</li>
+          <li><a href="news.html#module-news.serializers">news.serializers</a>
+</li>
+          <li><a href="news.html#module-news.signals">news.signals</a>
+</li>
+          <li><a href="news.html#module-news.tests">news.tests</a>
+</li>
+          <li><a href="news.html#module-news.twitter">news.twitter</a>
+</li>
+          <li><a href="news.html#module-news.urls">news.urls</a>
+</li>
+          <li><a href="news.html#module-news.utils">news.utils</a>
+</li>
+          <li><a href="news.html#module-news.views">news.views</a>
+</li>
+          <li><a href="newsapp.html#module-newsapp">newsapp</a>
+</li>
+          <li><a href="newsapp.html#module-newsapp.asgi">newsapp.asgi</a>
+</li>
+          <li><a href="newsapp.html#module-newsapp.settings">newsapp.settings</a>
+</li>
+          <li><a href="newsapp.html#module-newsapp.urls">newsapp.urls</a>
+</li>
+          <li><a href="newsapp.html#module-newsapp.wsgi">newsapp.wsgi</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.apps.AccountsConfig.name">name (accounts.apps.AccountsConfig attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.apps.NewsConfig.name">(news.apps.NewsConfig attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.name">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+        <li>
+    news
+
+        <ul>
+          <li><a href="news.html#module-news">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.admin
+
+        <ul>
+          <li><a href="news.html#module-news.admin">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.api_urls
+
+        <ul>
+          <li><a href="news.html#module-news.api_urls">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.api_views
+
+        <ul>
+          <li><a href="news.html#module-news.api_views">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.apps
+
+        <ul>
+          <li><a href="news.html#module-news.apps">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.decorators
+
+        <ul>
+          <li><a href="news.html#module-news.decorators">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.forms
+
+        <ul>
+          <li><a href="news.html#module-news.forms">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.models
+
+        <ul>
+          <li><a href="news.html#module-news.models">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.permissions
+
+        <ul>
+          <li><a href="news.html#module-news.permissions">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.serializers
+
+        <ul>
+          <li><a href="news.html#module-news.serializers">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.signals
+
+        <ul>
+          <li><a href="news.html#module-news.signals">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.tests
+
+        <ul>
+          <li><a href="news.html#module-news.tests">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.twitter
+
+        <ul>
+          <li><a href="news.html#module-news.twitter">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.urls
+
+        <ul>
+          <li><a href="news.html#module-news.urls">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    news.utils
+
+        <ul>
+          <li><a href="news.html#module-news.utils">module</a>
+</li>
+        </ul></li>
+        <li>
+    news.views
+
+        <ul>
+          <li><a href="news.html#module-news.views">module</a>
+</li>
+        </ul></li>
+        <li>
+    newsapp
+
+        <ul>
+          <li><a href="newsapp.html#module-newsapp">module</a>
+</li>
+        </ul></li>
+        <li>
+    newsapp.asgi
+
+        <ul>
+          <li><a href="newsapp.html#module-newsapp.asgi">module</a>
+</li>
+        </ul></li>
+        <li>
+    newsapp.settings
+
+        <ul>
+          <li><a href="newsapp.html#module-newsapp.settings">module</a>
+</li>
+        </ul></li>
+        <li>
+    newsapp.urls
+
+        <ul>
+          <li><a href="newsapp.html#module-newsapp.urls">module</a>
+</li>
+        </ul></li>
+        <li>
+    newsapp.wsgi
+
+        <ul>
+          <li><a href="newsapp.html#module-newsapp.wsgi">module</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.apps.NewsConfig">NewsConfig (class in news.apps)</a>
+</li>
+        <li><a href="news.html#news.models.Newsletter">Newsletter (class in news.models)</a>
+</li>
+        <li><a href="news.html#news.models.Newsletter.DoesNotExist">Newsletter.DoesNotExist</a>
+</li>
+        <li><a href="news.html#news.models.Newsletter.MultipleObjectsReturned">Newsletter.MultipleObjectsReturned</a>
+</li>
+        <li><a href="news.html#news.models.Newsletter.NotUpdated">Newsletter.NotUpdated</a>
+</li>
+        <li><a href="news.html#news.views.newsletter_detail">newsletter_detail() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.newsletter_list">newsletter_list() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.admin.NewsletterAdmin">NewsletterAdmin (class in news.admin)</a>
+</li>
+        <li><a href="news.html#news.tests.NewsletterAPITests">NewsletterAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.api_views.NewsletterDetailView">NewsletterDetailView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.forms.NewsletterForm">NewsletterForm (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.forms.NewsletterForm.Meta">NewsletterForm.Meta (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.api_views.NewsletterListCreateView">NewsletterListCreateView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.tests.NewsletterModelTests">NewsletterModelTests (class in news.tests)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.newsletters">newsletters (accounts.models.CustomUser attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Article.newsletters">(news.models.Article attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.serializers.NewsletterSerializer">NewsletterSerializer (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.serializers.NewsletterSerializer.Meta">NewsletterSerializer.Meta (class in news.serializers)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="O" class="genindex-section">
+  <h2>O</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Article.objects">objects (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.objects">(news.models.Newsletter attribute)</a>
+</li>
+          <li><a href="news.html#news.models.Publisher.objects">(news.models.Publisher attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.signals.on_article_approved">on_article_approved() (in module news.signals)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.password">password (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleApproveView.patch">patch() (news.api_views.ArticleApproveView method)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleListCreateView.perform_create">perform_create() (news.api_views.ArticleListCreateView method)</a>
+
+        <ul>
+          <li><a href="news.html#news.api_views.NewsletterListCreateView.perform_create">(news.api_views.NewsletterListCreateView method)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.api_views.ArticleApproveView.permission_classes">permission_classes (news.api_views.ArticleApproveView attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.api_views.ArticleDetailView.permission_classes">(news.api_views.ArticleDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.ArticleListCreateView.permission_classes">(news.api_views.ArticleListCreateView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.ArticleSubscribedListView.permission_classes">(news.api_views.ArticleSubscribedListView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.NewsletterDetailView.permission_classes">(news.api_views.NewsletterDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.NewsletterListCreateView.permission_classes">(news.api_views.NewsletterListCreateView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherDetailView.permission_classes">(news.api_views.PublisherDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherListCreateView.permission_classes">(news.api_views.PublisherListCreateView attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.models.Publisher">Publisher (class in news.models)</a>
+</li>
+        <li><a href="news.html#news.models.Article.publisher">publisher (news.models.Article attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Publisher.DoesNotExist">Publisher.DoesNotExist</a>
+</li>
+        <li><a href="news.html#news.models.Publisher.MultipleObjectsReturned">Publisher.MultipleObjectsReturned</a>
+</li>
+        <li><a href="news.html#news.models.Publisher.NotUpdated">Publisher.NotUpdated</a>
+</li>
+        <li><a href="news.html#news.views.publisher_detail">publisher_detail() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.models.Article.publisher_id">publisher_id (news.models.Article attribute)</a>
+</li>
+        <li><a href="news.html#news.admin.PublisherAdmin">PublisherAdmin (class in news.admin)</a>
+</li>
+        <li><a href="news.html#news.tests.PublisherAPITests">PublisherAPITests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.api_views.PublisherDetailView">PublisherDetailView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.forms.PublisherForm">PublisherForm (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.forms.PublisherForm.Meta">PublisherForm.Meta (class in news.forms)</a>
+</li>
+        <li><a href="news.html#news.api_views.PublisherListCreateView">PublisherListCreateView (class in news.api_views)</a>
+</li>
+        <li><a href="news.html#news.tests.PublisherModelTests">PublisherModelTests (class in news.tests)</a>
+</li>
+        <li><a href="news.html#news.serializers.PublisherSerializer">PublisherSerializer (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.serializers.PublisherSerializer.Meta">PublisherSerializer.Meta (class in news.serializers)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.api_views.ArticleDetailView.queryset">queryset (news.api_views.ArticleDetailView attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.api_views.NewsletterDetailView.queryset">(news.api_views.NewsletterDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.NewsletterListCreateView.queryset">(news.api_views.NewsletterListCreateView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherDetailView.queryset">(news.api_views.PublisherDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherListCreateView.queryset">(news.api_views.PublisherListCreateView attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.serializers.ArticleApprovalSerializer.Meta.read_only_fields">read_only_fields (news.serializers.ArticleApprovalSerializer.Meta attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.serializers.ArticleSerializer.Meta.read_only_fields">(news.serializers.ArticleSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.NewsletterSerializer.Meta.read_only_fields">(news.serializers.NewsletterSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.PublisherSerializer.Meta.read_only_fields">(news.serializers.PublisherSerializer.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.serializers.UserSerializer.Meta.read_only_fields">(news.serializers.UserSerializer.Meta attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.decorators.reader_required">reader_required() (in module news.decorators)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.readers">readers (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.apps.AccountsConfig.ready">ready() (accounts.apps.AccountsConfig method)</a>
+
+        <ul>
+          <li><a href="news.html#news.apps.NewsConfig.ready">(news.apps.NewsConfig method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.views.register">register() (in module accounts.views)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.RegisterViewTests">RegisterViewTests (class in accounts.tests)</a>
+</li>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm">RegistrationForm (class in accounts.forms)</a>
+</li>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.Meta">RegistrationForm.Meta (class in accounts.forms)</a>
+</li>
+        <li><a href="news.html#news.views.reject_article">reject_article() (in module news.views)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.role">role (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.ROLE_CHOICES">ROLE_CHOICES (accounts.models.CustomUser attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.forms.RegistrationForm.save">save() (accounts.forms.RegistrationForm method)</a>
+</li>
+        <li><a href="news.html#news.admin.ArticleAdmin.search_fields">search_fields (news.admin.ArticleAdmin attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.admin.PublisherAdmin.search_fields">(news.admin.PublisherAdmin attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.utils.send_approval_emails">send_approval_emails() (in module news.utils)</a>
+</li>
+        <li><a href="news.html#news.api_views.ArticleDetailView.serializer_class">serializer_class (news.api_views.ArticleDetailView attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.api_views.ArticleListCreateView.serializer_class">(news.api_views.ArticleListCreateView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.ArticleSubscribedListView.serializer_class">(news.api_views.ArticleSubscribedListView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.NewsletterDetailView.serializer_class">(news.api_views.NewsletterDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.NewsletterListCreateView.serializer_class">(news.api_views.NewsletterListCreateView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherDetailView.serializer_class">(news.api_views.PublisherDetailView attribute)</a>
+</li>
+          <li><a href="news.html#news.api_views.PublisherListCreateView.serializer_class">(news.api_views.PublisherListCreateView attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests.setUp">setUp() (accounts.tests.LoginViewTests method)</a>
+
+        <ul>
+          <li><a href="accounts.html#accounts.tests.RegisterViewTests.setUp">(accounts.tests.RegisterViewTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleAPITests.setUp">(news.tests.ArticleAPITests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleApprovalTests.setUp">(news.tests.ArticleApprovalTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleApproveAPITests.setUp">(news.tests.ArticleApproveAPITests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleDeleteAPITests.setUp">(news.tests.ArticleDeleteAPITests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleListViewTests.setUp">(news.tests.ArticleListViewTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleModelTests.setUp">(news.tests.ArticleModelTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.ArticleSubscribedAPITests.setUp">(news.tests.ArticleSubscribedAPITests method)</a>
+</li>
+          <li><a href="news.html#news.tests.DecoratorAccessTests.setUp">(news.tests.DecoratorAccessTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.NewsletterAPITests.setUp">(news.tests.NewsletterAPITests method)</a>
+</li>
+          <li><a href="news.html#news.tests.NewsletterModelTests.setUp">(news.tests.NewsletterModelTests method)</a>
+</li>
+          <li><a href="news.html#news.tests.PublisherAPITests.setUp">(news.tests.PublisherAPITests method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Article.submitted">submitted (news.models.Article attribute)</a>
+</li>
+        <li><a href="news.html#news.views.subscribe_journalist">subscribe_journalist() (in module news.views)</a>
+</li>
+        <li><a href="news.html#news.views.subscribe_publisher">subscribe_publisher() (in module news.views)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.subscribed_journalists">subscribed_journalists (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.subscribed_publishers">subscribed_publishers (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="news.html#news.models.Publisher.subscribers">subscribers (news.models.Publisher attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.tests.ArticleApprovalTests.test_approve_sends_email_to_subscribers">test_approve_sends_email_to_subscribers() (news.tests.ArticleApprovalTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleApprovalTests.test_approve_sets_approved_flag">test_approve_sets_approved_flag() (news.tests.ArticleApprovalTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleModelTests.test_approved_defaults_to_false">test_approved_defaults_to_false() (news.tests.ArticleModelTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleListViewTests.test_article_list_returns_200">test_article_list_returns_200() (news.tests.ArticleListViewTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.RegisterViewTests.test_duplicate_email_rejected">test_duplicate_email_rejected() (accounts.tests.RegisterViewTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleApproveAPITests.test_editor_can_approve_via_api">test_editor_can_approve_via_api() (news.tests.ArticleApproveAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.PublisherAPITests.test_editor_can_create_publisher">test_editor_can_create_publisher() (news.tests.PublisherAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleDeleteAPITests.test_editor_can_delete_article">test_editor_can_delete_article() (news.tests.ArticleDeleteAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.DecoratorAccessTests.test_editor_required_allows_editor">test_editor_required_allows_editor() (news.tests.DecoratorAccessTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.DecoratorAccessTests.test_editor_required_blocks_journalist">test_editor_required_blocks_journalist() (news.tests.DecoratorAccessTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.CustomUserRoleTests.test_email_is_unique">test_email_is_unique() (accounts.tests.CustomUserRoleTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests.test_invalid_credentials_stay_on_login">test_invalid_credentials_stay_on_login() (accounts.tests.LoginViewTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.CustomUserRoleTests.test_is_editor_returns_true_for_editor">test_is_editor_returns_true_for_editor() (accounts.tests.CustomUserRoleTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.CustomUserRoleTests.test_is_journalist_returns_true_for_journalist">test_is_journalist_returns_true_for_journalist() (accounts.tests.CustomUserRoleTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.CustomUserRoleTests.test_is_reader_returns_true_for_reader">test_is_reader_returns_true_for_reader() (accounts.tests.CustomUserRoleTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleAPITests.test_journalist_can_create_article">test_journalist_can_create_article() (news.tests.ArticleAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.NewsletterAPITests.test_journalist_can_create_newsletter">test_journalist_can_create_newsletter() (news.tests.NewsletterAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.PublisherAPITests.test_journalist_cannot_create_publisher">test_journalist_cannot_create_publisher() (news.tests.PublisherAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.DecoratorAccessTests.test_journalist_required_allows_journalist">test_journalist_required_allows_journalist() (news.tests.DecoratorAccessTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.DecoratorAccessTests.test_journalist_required_blocks_reader">test_journalist_required_blocks_reader() (news.tests.DecoratorAccessTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.NewsletterAPITests.test_list_newsletters_is_public">test_list_newsletters_is_public() (news.tests.NewsletterAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.PublisherAPITests.test_list_publishers_is_public">test_list_publishers_is_public() (news.tests.PublisherAPITests method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.tests.ArticleAPITests.test_list_returns_approved_articles">test_list_returns_approved_articles() (news.tests.ArticleAPITests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests.test_login_page_loads">test_login_page_loads() (accounts.tests.LoginViewTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests.test_logout_redirects">test_logout_redirects() (accounts.tests.LoginViewTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleApproveAPITests.test_non_editor_cannot_approve_via_api">test_non_editor_cannot_approve_via_api() (news.tests.ArticleApproveAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleListViewTests.test_only_approved_articles_shown">test_only_approved_articles_shown() (news.tests.ArticleListViewTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleAPITests.test_reader_cannot_create_article">test_reader_cannot_create_article() (news.tests.ArticleAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.NewsletterAPITests.test_reader_cannot_create_newsletter">test_reader_cannot_create_newsletter() (news.tests.NewsletterAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleDeleteAPITests.test_reader_cannot_delete_article">test_reader_cannot_delete_article() (news.tests.ArticleDeleteAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleSubscribedAPITests.test_reader_gets_subscribed_articles">test_reader_gets_subscribed_articles() (news.tests.ArticleSubscribedAPITests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.RegisterViewTests.test_register_page_loads">test_register_page_loads() (accounts.tests.RegisterViewTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleModelTests.test_str_includes_title_and_author">test_str_includes_title_and_author() (news.tests.ArticleModelTests method)</a>
+
+        <ul>
+          <li><a href="news.html#news.tests.NewsletterModelTests.test_str_includes_title_and_author">(news.tests.NewsletterModelTests method)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.tests.PublisherModelTests.test_str_returns_name">test_str_returns_name() (news.tests.PublisherModelTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.RegisterViewTests.test_successful_registration_creates_user">test_successful_registration_creates_user() (accounts.tests.RegisterViewTests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleSubscribedAPITests.test_unauthenticated_cannot_access_subscribed">test_unauthenticated_cannot_access_subscribed() (news.tests.ArticleSubscribedAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.ArticleAPITests.test_unauthenticated_cannot_create_article">test_unauthenticated_cannot_create_article() (news.tests.ArticleAPITests method)</a>
+</li>
+        <li><a href="news.html#news.tests.DecoratorAccessTests.test_unauthenticated_user_redirected_to_login">test_unauthenticated_user_redirected_to_login() (news.tests.DecoratorAccessTests method)</a>
+</li>
+        <li><a href="accounts.html#accounts.tests.LoginViewTests.test_valid_credentials_log_user_in">test_valid_credentials_log_user_in() (accounts.tests.LoginViewTests method)</a>
+</li>
+        <li><a href="news.html#news.models.Article.title">title (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.title">(news.models.Newsletter attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.twitter.TwitterService.tweet">tweet() (news.twitter.TwitterService method)</a>
+</li>
+        <li><a href="news.html#news.utils.tweet_approved_article">tweet_approved_article() (in module news.utils)</a>
+</li>
+        <li><a href="news.html#news.twitter.TwitterService">TwitterService (class in news.twitter)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Article.updated_at">updated_at (news.models.Article attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.models.Newsletter.updated_at">(news.models.Newsletter attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="news.html#news.twitter.TwitterService.upload_media">upload_media() (news.twitter.TwitterService method)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="accounts.html#accounts.models.CustomUser.user_permissions">user_permissions (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="accounts.html#accounts.models.CustomUser.username">username (accounts.models.CustomUser attribute)</a>
+</li>
+        <li><a href="news.html#news.serializers.UserSerializer">UserSerializer (class in news.serializers)</a>
+</li>
+        <li><a href="news.html#news.serializers.UserSerializer.Meta">UserSerializer.Meta (class in news.serializers)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="news.html#news.models.Publisher.website">website (news.models.Publisher attribute)</a>
+</li>
+        <li><a href="news.html#news.forms.ArticleForm.Meta.widgets">widgets (news.forms.ArticleForm.Meta attribute)</a>
+
+        <ul>
+          <li><a href="news.html#news.forms.NewsletterForm.Meta.widgets">(news.forms.NewsletterForm.Meta attribute)</a>
+</li>
+          <li><a href="news.html#news.forms.PublisherForm.Meta.widgets">(news.forms.PublisherForm.Meta attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2026, C
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>news.decorators &mdash; NewsApp 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NewsApp
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">newsapp</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NewsApp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">news.decorators</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for news.decorators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">news.decorators</span>
+<span class="sd">===============</span>
+
+<span class="sd">Role-based access-control decorators for NewsApp views.</span>
+
+<span class="sd">Decorators</span>
+<span class="sd">----------</span>
+<span class="sd">journalist_required</span>
+<span class="sd">    Restrict a view to authenticated users with ``role=&#39;journalist&#39;``.</span>
+<span class="sd">editor_required</span>
+<span class="sd">    Restrict a view to authenticated users with ``role=&#39;editor&#39;``.</span>
+<span class="sd">reader_required</span>
+<span class="sd">    Restrict a view to authenticated users with ``role=&#39;reader&#39;``.</span>
+<span class="sd">login_required_custom</span>
+<span class="sd">    Require authentication only; object-level role checks are handled</span>
+<span class="sd">    inside the view itself.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">render</span>
+
+
+<div class="viewcode-block" id="journalist_required">
+<a class="viewcode-back" href="../../news.html#news.decorators.journalist_required">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">journalist_required</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restrict the decorated view to users with the Journalist role.</span>
+
+<span class="sd">    Anonymous users are redirected to the login page.</span>
+<span class="sd">    Authenticated users with a different role receive a 403 response.</span>
+
+<span class="sd">    :param view_func: The view function to wrap.</span>
+<span class="sd">    :type view_func: callable</span>
+<span class="sd">    :returns: The wrapped view enforcing journalist-only access.</span>
+<span class="sd">    :rtype: callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enforce journalist role before calling the wrapped view.</span>
+
+<span class="sd">        :param request: The incoming HTTP request.</span>
+<span class="sd">        :type request: HttpRequest</span>
+<span class="sd">        :param args: Positional arguments forwarded to the view.</span>
+<span class="sd">        :param kwargs: Keyword arguments forwarded to the view.</span>
+<span class="sd">        :returns: Redirect, 403 response, or the original view response.</span>
+<span class="sd">        :rtype: HttpResponse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">LOGIN_URL</span><span class="si">}</span><span class="s1">?next=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_journalist</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;403.html&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="editor_required">
+<a class="viewcode-back" href="../../news.html#news.decorators.editor_required">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">editor_required</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restrict the decorated view to users with the Editor role.</span>
+
+<span class="sd">    Anonymous users are redirected to the login page.</span>
+<span class="sd">    Authenticated users with a different role receive a 403 response.</span>
+
+<span class="sd">    :param view_func: The view function to wrap.</span>
+<span class="sd">    :type view_func: callable</span>
+<span class="sd">    :returns: The wrapped view enforcing editor-only access.</span>
+<span class="sd">    :rtype: callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enforce editor role before calling the wrapped view.</span>
+
+<span class="sd">        :param request: The incoming HTTP request.</span>
+<span class="sd">        :type request: HttpRequest</span>
+<span class="sd">        :param args: Positional arguments forwarded to the view.</span>
+<span class="sd">        :param kwargs: Keyword arguments forwarded to the view.</span>
+<span class="sd">        :returns: Redirect, 403 response, or the original view response.</span>
+<span class="sd">        :rtype: HttpResponse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">LOGIN_URL</span><span class="si">}</span><span class="s1">?next=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_editor</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;403.html&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="reader_required">
+<a class="viewcode-back" href="../../news.html#news.decorators.reader_required">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reader_required</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restrict the decorated view to users with the Reader role.</span>
+
+<span class="sd">    Anonymous users are redirected to the login page.</span>
+<span class="sd">    Authenticated users with a different role receive a 403 response.</span>
+
+<span class="sd">    :param view_func: The view function to wrap.</span>
+<span class="sd">    :type view_func: callable</span>
+<span class="sd">    :returns: The wrapped view enforcing reader-only access.</span>
+<span class="sd">    :rtype: callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enforce reader role before calling the wrapped view.</span>
+
+<span class="sd">        :param request: The incoming HTTP request.</span>
+<span class="sd">        :type request: HttpRequest</span>
+<span class="sd">        :param args: Positional arguments forwarded to the view.</span>
+<span class="sd">        :param kwargs: Keyword arguments forwarded to the view.</span>
+<span class="sd">        :returns: Redirect, 403 response, or the original view response.</span>
+<span class="sd">        :rtype: HttpResponse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">LOGIN_URL</span><span class="si">}</span><span class="s1">?next=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_reader</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;403.html&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">403</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="login_required_custom">
+<a class="viewcode-back" href="../../news.html#news.decorators.login_required_custom">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">login_required_custom</span><span class="p">(</span><span class="n">view_func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Require the user to be authenticated.</span>
+
+<span class="sd">    Used for views that perform their own object-level role checks</span>
+<span class="sd">    internally (e.g. edit/delete where the article author and editors</span>
+<span class="sd">    are both permitted). Anonymous users are redirected to the login</span>
+<span class="sd">    page.</span>
+
+<span class="sd">    :param view_func: The view function to wrap.</span>
+<span class="sd">    :type view_func: callable</span>
+<span class="sd">    :returns: The wrapped view enforcing authentication.</span>
+<span class="sd">    :rtype: callable</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redirect anonymous users to the login page.</span>
+
+<span class="sd">        :param request: The incoming HTTP request.</span>
+<span class="sd">        :type request: HttpRequest</span>
+<span class="sd">        :param args: Positional arguments forwarded to the view.</span>
+<span class="sd">        :param kwargs: Keyword arguments forwarded to the view.</span>
+<span class="sd">        :returns: Redirect to login, or the original view response.</span>
+<span class="sd">        :rtype: HttpResponse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">LOGIN_URL</span><span class="si">}</span><span class="s1">?next=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view_func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, C.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
