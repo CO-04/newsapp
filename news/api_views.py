@@ -1,33 +1,28 @@
 """
-DRF API views for the news app.
+news.api_views
+==============
+
+Django REST Framework API views for the NewsApp news module.
 
 Endpoints
 ---------
 Publishers
-  GET  /api/publishers/          – list all publishers
-  POST /api/publishers/          – create a publisher (editor only)
-  GET  /api/publishers/<pk>/     – publisher detail
-  PUT/PATCH /api/publishers/<pk>/– update a publisher (editor only)
-  DELETE    /api/publishers/<pk>/– delete a publisher (editor only)
+    ``GET/POST /api/publishers/`` — list or create publishers.
+    ``GET/PUT/PATCH/DELETE /api/publishers/<pk>/`` — detail, update, delete.
 
 Articles
-  GET  /api/articles/       – list articles (filtered by role)
-  POST /api/articles/            – create article (journalist only)
-  GET  /api/articles/<pk>/       – article detail
-  PUT/PATCH /api/articles/<pk>/  – update article (author or editor)
-  DELETE    /api/articles/<pk>/  – delete article (author or editor)
-  PATCH     /api/articles/<pk>/approve/ – approve article (editor only)
+    ``GET/POST /api/articles/`` — list (role-filtered) or create.
+    ``GET /api/articles/subscribed/`` — reader's subscription feed.
+    ``GET/PUT/PATCH/DELETE /api/articles/<pk>/`` — detail, update, delete.
+    ``PATCH /api/articles/<pk>/approve/`` — editor approval.
 
 Newsletters
-  GET  /api/newsletters/         – list all newsletters
-  POST /api/newsletters/         – create newsletter (journalist only)
-  GET  /api/newsletters/<pk>/    – newsletter detail
-  PUT/PATCH /api/newsletters/<pk>/– update newsletter (author or editor)
-  DELETE    /api/newsletters/<pk>/– delete newsletter (author or editor)
+    ``GET/POST /api/newsletters/`` — list or create.
+    ``GET/PUT/PATCH/DELETE /api/newsletters/<pk>/`` — detail, update, delete.
 
 JWT Auth
-  POST /api/token/               – obtain access + refresh tokens
-  POST /api/token/refresh/       – refresh access token
+    ``POST /api/token/`` — obtain access + refresh tokens.
+    ``POST /api/token/refresh/`` — refresh access token.
 """
 
 from rest_framework import generics, status
@@ -55,9 +50,12 @@ from .serializers import (
 # ---------------------------------------------------------------------------
 
 class PublisherListCreateView(generics.ListCreateAPIView):
-    """
-    GET  – list all publishers (public).
-    POST – create a publisher (editor only).
+    """List all publishers or create a new one.
+
+    - ``GET`` — public; returns all publishers ordered by name.
+    - ``POST`` — editors only; creates a new publisher.
+
+    :permission_classes: :class:`IsEditorOrReadOnly`
     """
 
     queryset           = Publisher.objects.order_by('name')
@@ -66,9 +64,12 @@ class PublisherListCreateView(generics.ListCreateAPIView):
 
 
 class PublisherDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET    – publisher detail (public).
-    PUT / PATCH / DELETE – editor only.
+    """Retrieve, update, or delete a single publisher.
+
+    - ``GET`` — public; returns publisher detail.
+    - ``PUT`` / ``PATCH`` / ``DELETE`` — editors only.
+
+    :permission_classes: :class:`IsEditorOrReadOnly`
     """
 
     queryset           = Publisher.objects.all()
@@ -81,16 +82,24 @@ class PublisherDetailView(generics.RetrieveUpdateDestroyAPIView):
 # ---------------------------------------------------------------------------
 
 class ArticleListCreateView(generics.ListCreateAPIView):
-    """
-    GET  – list approved articles; authors and editors also see unapproved.
-    POST – create an article (journalist only).
+    """List articles (role-filtered) or create a new article.
+
+    - ``GET`` — approved articles for anonymous/readers; editors see
+      all; journalists see approved plus their own drafts.
+    - ``POST`` — journalists only; author is set from the request.
+
+    :permission_classes: :class:`IsJournalistOrReadOnly`
     """
 
     serializer_class   = ArticleSerializer
     permission_classes = [IsJournalistOrReadOnly]
 
     def get_queryset(self):
-        """Return articles visible to the requesting user."""
+        """Return articles visible to the requesting user.
+
+        :returns: Queryset of articles filtered by the user's role.
+        :rtype: QuerySet
+        """
         user = self.request.user
         qs = (
             Article.objects
@@ -108,26 +117,34 @@ class ArticleListCreateView(generics.ListCreateAPIView):
         return qs.filter(approved=True)
 
     def perform_create(self, serializer):
-        """Set the author to the logged-in journalist."""
+        """Set the author to the logged-in journalist before saving.
+
+        :param serializer: The validated article serializer instance.
+        :type serializer: ArticleSerializer
+        """
         serializer.save(author=self.request.user)
 
 
 class ArticleSubscribedListView(generics.ListAPIView):
-    """
-    GET /api/articles/subscribed/
+    """Return approved articles from a reader's subscriptions.
 
-    Returns approved articles from the authenticated reader's
-    subscribed publishers and journalists.
+    ``GET /api/articles/subscribed/`` — authenticated readers only.
+    Returns articles from the reader's subscribed publishers and
+    journalists. Non-readers receive an empty list.
 
-    Non-readers receive an empty list — subscriptions are a
-    reader-only concept.
+    :permission_classes: :class:`IsAuthenticated`
     """
 
     serializer_class   = ArticleSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """Return articles the requesting reader subscribes to."""
+        """Return articles the requesting reader subscribes to.
+
+        :returns: Queryset of approved articles from subscribed sources,
+            or an empty queryset for non-readers.
+        :rtype: QuerySet
+        """
         user = self.request.user
         if not user.is_reader():
             return Article.objects.none()
@@ -150,10 +167,14 @@ class ArticleSubscribedListView(generics.ListAPIView):
 
 
 class ArticleDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET          – article detail; unapproved visible to author/editor.
-    PUT / PATCH  – update (author or editor).
-    DELETE       – delete (author or editor).
+    """Retrieve, update, or delete a single article.
+
+    - ``GET`` — unapproved articles visible to their author or editors.
+    - ``PUT`` / ``PATCH`` — author or editor only.
+    - ``DELETE`` — author or editor only.
+
+    :permission_classes: :class:`IsApprovedOrAuthorOrEditor`,
+        :class:`IsAuthorOrEditor`
     """
 
     queryset           = Article.objects.select_related('author', 'publisher')
@@ -162,17 +183,28 @@ class ArticleDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ArticleApproveView(APIView):
-    """
-    PATCH /api/articles/<pk>/approve/
+    """Approve a submitted article.
 
-    Set approved=True on an article.  Editor only.
-    Fires the ``_just_approved`` signal so notification emails are sent.
+    ``PATCH /api/articles/<pk>/approve/`` — editors only.
+    Sets ``approved=True`` and fires the ``_just_approved`` signal so
+    notification emails are sent to subscribed readers.
+
+    :permission_classes: :class:`IsEditorOrReadOnly`
     """
 
     permission_classes = [IsEditorOrReadOnly]
 
     def patch(self, request, pk):
-        """Approve the article identified by ``pk``."""
+        """Approve the article identified by ``pk``.
+
+        :param request: The incoming HTTP request.
+        :type request: HttpRequest
+        :param pk: Primary key of the article to approve.
+        :type pk: int
+        :returns: Serialized article data on success, or a 400 error
+            if the article is already approved.
+        :rtype: Response
+        """
         article = generics.get_object_or_404(Article, pk=pk)
         if article.approved:
             return Response(
@@ -190,9 +222,12 @@ class ArticleApproveView(APIView):
 # ---------------------------------------------------------------------------
 
 class NewsletterListCreateView(generics.ListCreateAPIView):
-    """
-    GET  – list all newsletters (public).
-    POST – create a newsletter (journalist only).
+    """List all newsletters or create a new one.
+
+    - ``GET`` — public; returns all newsletters ordered by newest first.
+    - ``POST`` — journalists only; author is set from the request.
+
+    :permission_classes: :class:`IsJournalistOrReadOnly`
     """
 
     queryset = (
@@ -204,15 +239,21 @@ class NewsletterListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsJournalistOrReadOnly]
 
     def perform_create(self, serializer):
-        """Set the author to the logged-in journalist."""
+        """Set the author to the logged-in journalist before saving.
+
+        :param serializer: The validated newsletter serializer instance.
+        :type serializer: NewsletterSerializer
+        """
         serializer.save(author=self.request.user)
 
 
 class NewsletterDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET          – newsletter detail (public).
-    PUT / PATCH  – update (author or editor).
-    DELETE       – delete (author or editor).
+    """Retrieve, update, or delete a single newsletter.
+
+    - ``GET`` — public; returns newsletter detail with articles.
+    - ``PUT`` / ``PATCH`` / ``DELETE`` — author or editor only.
+
+    :permission_classes: :class:`IsAuthorOrEditor`
     """
 
     queryset = (
