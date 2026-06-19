@@ -1,3 +1,21 @@
+"""
+accounts.views
+==============
+
+HTTP view functions for the NewsApp accounts module.
+
+Views
+-----
+register
+    User registration form; logs in and redirects on success.
+login_user
+    Authentication form; redirects to role-appropriate page on success.
+logout_user
+    Logs out the current user and redirects to the article list.
+_role_redirect
+    Internal helper; returns a redirect based on the user's role.
+"""
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
@@ -6,13 +24,17 @@ from .forms import RegistrationForm
 
 
 def register(request):
-    """
-    Handle user registration for all roles via a single form.
+    """Handle user registration for all roles via a single form.
 
-    On success, log the user in and redirect based on their role:
-    - Journalist → journalist dashboard
-    - Editor     → editor review queue
-    - Reader     → article list (home)
+    Authenticated users are redirected away immediately. On successful
+    registration the user is logged in and redirected to their
+    role-appropriate landing page.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered registration form on GET/invalid POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     if request.user.is_authenticated:
         return redirect('news:article_list')
@@ -34,11 +56,17 @@ def register(request):
 
 
 def login_user(request):
-    """
-    Authenticate and log in a user.
+    """Authenticate and log in a user.
 
-    On success, redirect based on role (same logic as register).
+    On success, redirect to the role-appropriate landing page.
     On failure, display an error message and re-render the login form.
+    Authenticated users are redirected away immediately.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Rendered login form on GET/failed POST,
+        or redirect on success.
+    :rtype: HttpResponse
     """
     if request.user.is_authenticated:
         return redirect('news:article_list')
@@ -57,10 +85,14 @@ def login_user(request):
 
 
 def logout_user(request):
-    """
-    Log out the current user and redirect to the article list.
+    """Log out the current user and redirect to the article list.
 
-    Accepts GET and POST so a simple link or a form button both work.
+    Accepts both GET and POST so a simple link or a form button work.
+
+    :param request: The incoming HTTP request.
+    :type request: HttpRequest
+    :returns: Redirect to the article list.
+    :rtype: HttpResponseRedirect
     """
     logout(request)
     messages.info(request, 'You have been logged out.')
@@ -68,9 +100,13 @@ def logout_user(request):
 
 
 def _role_redirect(user):
-    """
-    Return an HttpResponseRedirect to the appropriate landing page for the
-    given user based on their role.
+    """Return a redirect to the role-appropriate landing page.
+
+    :param user: The authenticated user whose role determines the target.
+    :type user: CustomUser
+    :returns: Redirect to the journalist dashboard, editor queue,
+        or article list depending on the user's role.
+    :rtype: HttpResponseRedirect
     """
     if user.is_journalist():
         return redirect('news:journalist_dashboard')
