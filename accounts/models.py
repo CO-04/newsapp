@@ -1,26 +1,38 @@
+"""
+accounts.models
+===============
+
+Custom user model for the NewsApp accounts module.
+
+Models
+------
+CustomUser
+    Extends Django's ``AbstractUser`` with a role field and reader
+    subscription relations.
+"""
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class CustomUser(AbstractUser):
-    """
-    Extended user model supporting three roles: Reader, Journalist, Editor.
+    """Extended user model supporting three roles: Reader, Journalist, Editor.
 
-    Reader fields
-    -------------
-    subscribed_publishers : ManyToManyField → news.Publisher
-    subscribed_journalists : ManyToManyField (self, symmetrical=False)
+    :ivar role: The user's assigned role; one of ``reader``,
+        ``journalist``, or ``editor``.
+    :vartype role: str
+    :ivar email: Unique email address used for login and notifications.
+    :vartype email: str
+    :ivar bio: Optional biographical text displayed on the profile page.
+    :vartype bio: str
+    :ivar subscribed_publishers: Publishers the reader follows.
+    :vartype subscribed_publishers: ManyToManyField(Publisher)
+    :ivar subscribed_journalists: Journalists the reader follows.
+    :vartype subscribed_journalists: ManyToManyField(CustomUser)
 
-    Journalist / Editor fields
-    --------------------------
-    Articles and Newsletters are accessed via reverse FK relations
-    (articles, newsletters) on the relevant models.
-
-    Notes
-    -----
-    - email is enforced unique so password reset and subscription emails work.
-    - Role is set at registration and drives group assignment via a post_save
-      signal in accounts/signals.py.
+    .. note::
+        Role is set at registration and drives group assignment via a
+        ``post_save`` signal in ``accounts/signals.py``.
     """
 
     ROLE_CHOICES = [
@@ -49,17 +61,33 @@ class CustomUser(AbstractUser):
     )
 
     def is_reader(self):
-        """Return True if this user has the Reader role."""
+        """Return ``True`` if this user has the Reader role.
+
+        :returns: ``True`` if ``role == 'reader'``.
+        :rtype: bool
+        """
         return self.role == 'reader'
 
     def is_journalist(self):
-        """Return True if this user has the Journalist role."""
+        """Return ``True`` if this user has the Journalist role.
+
+        :returns: ``True`` if ``role == 'journalist'``.
+        :rtype: bool
+        """
         return self.role == 'journalist'
 
     def is_editor(self):
-        """Return True if this user has the Editor role or is a superuser."""
+        """Return ``True`` if this user has the Editor role or is a superuser.
+
+        :returns: ``True`` if ``role == 'editor'`` or ``is_superuser``.
+        :rtype: bool
+        """
         return self.role == 'editor' or self.is_superuser
 
     def __str__(self):
-        """Return username and role as a readable representation."""
+        """Return username and role as a human-readable string.
+
+        :returns: A string in the format ``'<username> (<role>)'``.
+        :rtype: str
+        """
         return f'{self.username} ({self.get_role_display()})'
