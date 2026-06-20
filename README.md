@@ -259,3 +259,63 @@ For production, switch to an SMTP backend and set `EMAIL_HOST`, `EMAIL_PORT`, `E
 - Object-level ownership checks prevent journalists from editing each other's articles
 - Django ORM is used for all queries — no raw SQL
 - `X-Frame-Options: DENY` is set via `XFrameOptionsMiddleware`
+
+---
+
+## Running with Docker
+
+The app is published on Docker Hub as [`coli04/newsapp`](https://hub.docker.com/r/coli04/newsapp).
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+
+### Quick start (no build needed)
+
+```bash
+# 1. Copy the example env file
+cp .env.example .env
+# Edit .env — see "Environment variables" below
+
+# 2. Start the database + web server
+docker compose up
+```
+
+Visit `http://localhost:8000/`
+
+### Build locally instead
+
+```bash
+docker build -t newsapp .
+docker compose up
+```
+
+### Environment variables for Docker
+
+`docker-compose.yml` passes environment variables directly to the container.  
+For local use the defaults in the file are fine. For any other environment,
+set the following in `.env` or override them in `docker-compose.yml`:
+
+| Variable | Description |
+|---|---|
+| `SECRET_KEY` | Django secret key — **never share this** |
+| `DEBUG` | `True` for development, `False` for production |
+| `ALLOWED_HOSTS` | Comma-separated hostnames, e.g. `localhost,127.0.0.1` |
+| `DB_NAME` | Database name |
+| `DB_USER` | Database user |
+| `DB_PASSWORD` | Database password — **never commit this** |
+| `DB_HOST` | Database host (use `db` when using docker-compose) |
+| `DB_PORT` | Database port (default `3306`) |
+| `TWITTER_API_KEY` | X/Twitter API key (optional — leave blank to disable) |
+| `TWITTER_API_KEY_SECRET` | X/Twitter API key secret (optional) |
+| `TWITTER_ACCESS_TOKEN` | X/Twitter access token (optional) |
+| `TWITTER_ACCESS_TOKEN_SECRET` | X/Twitter access token secret (optional) |
+
+You can obtain Twitter/X credentials at [developer.x.com](https://developer.x.com).
+
+### Stopping the app
+
+```bash
+docker compose down        # stop containers
+docker compose down -v     # stop and delete the database volume
+```
