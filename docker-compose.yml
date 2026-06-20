@@ -16,6 +16,7 @@ services:
       retries: 10
 
   web:
+    image: coli04/newsapp:latest
     build: .
     restart: unless-stopped
     command: >
