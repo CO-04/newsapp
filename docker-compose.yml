@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: newsapp_db
+      MYSQL_USER: newsapp_user
+      MYSQL_PASSWORD: newsapp_pass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    restart: unless-stopped
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "True"
+      SECRET_KEY: "docker-dev-secret-key-change-in-production"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0"
+      DB_NAME: newsapp_db
+      DB_USER: newsapp_user
+      DB_PASSWORD: newsapp_pass
+      DB_HOST: db
+      DB_PORT: "3306"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:
